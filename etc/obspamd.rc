@@ -1,0 +1,68 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:		obspamd
+# Required-Start:	$remote_fs $syslog
+# Required-Stop:	$remote_fs $syslog
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	Start obspamd at boot time
+# Description:		OpenBSD spam deferral daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/local/sbin/obspamd
+NAME=obspamd
+DESC=obspamd
+
+test -e $DAEMON || exit 0
+
+# Include obspamd defaults if available
+if [ -f /etc/default/obspamd ]
+then
+	. /etc/default/obspamd
+fi
+
+set -e
+
+check_privsep_dir()
+{
+	# check that the privsep dir exists
+	if [ ! -d /var/empty ]
+	then
+		mkdir /var/empty
+		chmod 0755 /var/empty
+	fi
+}
+
+case "$1" in
+	start)
+		check_privsep_dir
+		echo -n "Starting $DESC: "
+		start-stop-daemon --start --quiet --exec $DAEMON -- $DAEMON_OPTS
+		echo "$NAME."
+		;;
+
+	stop)
+		echo -n "Stopping $DESC: "
+		start-stop-daemon --stop --oknodo --quiet --exec $DAEMON
+		echo "$NAME."
+		;;
+
+	restart|force-reload)
+		echo -n "Restarting $DESC: "
+		start-stop-daemon --stop --oknodo --quiet --exec $DAEMON
+		sleep 1
+		check_privsep_dir
+		start-stop-daemon --start --quiet --exec $DAEMON -- $DAEMON_OPTS
+		echo "$NAME."
+		;;
+
+	*)
+		N=/etc/init.d/$NAME
+		echo "Usage: $N {start|stop|restart|force-reload}" >&2
+		exit 1
+		;;
+esac
+
+exit 0

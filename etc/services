@@ -1,0 +1,4 @@
+obspamd		8025/tcp			# OpenBSD spamd(8)
+obspamd-sync	8025/udp			# OpenBSD spamd(8) synchronisation
+obspamd-cfg	8026/tcp			# OpenBSD spamd(8) configuration
+
