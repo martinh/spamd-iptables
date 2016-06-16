@@ -1,5 +1,12 @@
+SYSTEM := $(shell uname -o)
+PWD := $(shell pwd)
+
+CFLAGS = -I$(PWD)/compat
+
+CFLAGS += -D_LINUX_
+
 all:
-	$(MAKE) -C obspamd all
+	$(MAKE) -C obspamd CFLAGS="$(CFLAGS)" all
 	$(MAKE) -C obspamdb all
 	$(MAKE) -C obspamd-setup all
 	$(MAKE) -C obspamlogd all

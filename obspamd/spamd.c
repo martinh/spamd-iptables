@@ -631,7 +631,7 @@ initcon(struct con *cp, int fd, struct sockaddr *sa)
 		errx(1, "not supported yet");
 	memcpy(&cp->ss, sa, len);
 	cp->af = sa->sa_family;
-	if (cp->af == AF_INET
+	if (cp->af == AF_INET)
 		cp->ia = &((struct sockaddr_in *)&cp->ss)->sin_addr;
 	else
 		cp->ia = &((struct sockaddr_in6 *)&cp->ss)->sin6_addr;
