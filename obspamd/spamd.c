@@ -1075,13 +1075,13 @@ main(int argc, char *argv[])
 	openlog_r("obspamd", LOG_PID | LOG_NDELAY, LOG_DAEMON, &sdata);
 
 	if ((ent = getservbyname("obspamd", "tcp")) == NULL)
-		errx(1, "Can't find service \"obspamd\" in /etc/services");
+		errx(1, "Can't find service \"obspamd\/tcp\" in /etc/services");
 	port = ntohs(ent->s_port);
 	if ((ent = getservbyname("obspamd-cfg", "tcp")) == NULL)
-		errx(1, "Can't find service \"obspamd-cfg\" in /etc/services");
+		errx(1, "Can't find service \"obspamd-cfg\/tcp\" in /etc/services");
 	cfg_port = ntohs(ent->s_port);
 	if ((ent = getservbyname("obspamd-sync", "udp")) == NULL)
-		errx(1, "Can't find service \"obspamd-sync\" in /etc/services");
+		errx(1, "Can't find service \"obspamd-sync\/udp\" in /etc/services");
 	sync_port = ntohs(ent->s_port);
 
 	if (gethostname(hostname, sizeof hostname) == -1)

@@ -2,7 +2,6 @@ SYSTEM := $(shell uname -o)
 PWD := $(shell pwd)
 
 CFLAGS = -I$(PWD)/compat
-
 CFLAGS += -D_LINUX_
 
 all:
