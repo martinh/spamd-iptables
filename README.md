@@ -61,3 +61,9 @@ This is a port of the OpenBSD spam deferral daemon [spamd](http://www.openbsd.or
 
 OpenBSD spamd uses the ISC and BSD licenses. See each individual file for details.
 
+## Build
+It was done into a Ubuntu 14.04.  It required:
+ * GNU make
+ * gcc
+ * libdb-dev
+

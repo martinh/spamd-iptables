@@ -12,7 +12,7 @@ MAN=	spamd.8
 CFLAGS+= -Wall -Wstrict-prototypes
 CFLAGS+= -I../compat -D_GNU_SOURCE
 
-LDADD+=	-ldb -lcrypto -liptc
+LDADD+=	-ldb -lcrypto -liptc -lip4tc -lip6tc
 
 all: $(PROG)
 
